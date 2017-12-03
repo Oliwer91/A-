@@ -1,0 +1,114 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="apple-touch-icon" href="icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <script src="js/main.js"></script>
+
+        <canvas  height="600" width="600" id="myCanvas">
+        <script>
+            var c =document.getElementById("myCanvas");
+            var ctx=c.getContext("2d");
+            var xPos=0;
+            var yPos =0;
+            var xSize =12;
+            var ySize =12;
+            var myMap = [];
+            var position = [];
+            var clicked ;
+            var block = [];
+            var startPosition;
+            var ziel;
+            startPosition = Math.floor((Math.random() * 2500) + 1);
+            for( i = 1;i<2501;i++){
+
+                var t = new Tile(i,xPos,yPos,xSize,ySize,ctx);
+              //  t.getFx(xPos,xSize);
+                xPos +=xSize;
+                if(i%50==0){
+                    yPos +=ySize;
+                    xPos = 0;
+                }
+                console.log(t.getFx());
+                myMap.push(t);
+            }
+
+
+                myMap[startPosition].setStart(true,ctx);
+
+                c.addEventListener("click", function(e) {
+                var mousePos = getMousePos(c, e);
+                position = {X:mousePos.x, Y:mousePos.y};
+                var o = getObject(position,myMap);
+                if(clicked == startPosition){
+                    alert("Nicht möglich da Startposition")
+                }else{
+                    if(!block.includes(clicked)){
+                        myMap[clicked].setWall(true,ctx);
+                    }
+                    else{
+                         alert("Besteht bereits");
+                    }
+
+                }
+
+            },false);
+
+            c.addEventListener("dblclick", function(e) {
+                var mousePos = getMousePos(c, e);
+                position = {X:mousePos.x, Y:mousePos.y};
+                var o = getObject(position,myMap);
+                if (typeof(ziel) == "undefined"){
+                    if(clicked == startPosition){
+                        alert("Nicht möglich da Startposition")
+                    }else {
+                            myMap[clicked].setGoal(true,ctx);
+                            ziel= myMap[clicked];
+                            block.push(clicked);
+                    }
+                }
+                else{
+                        alert("Ziel bereits Definiert!")
+                    }
+
+
+
+
+            },false);
+
+
+
+
+                function getObject(position, myMap) {
+                    this.x = Math.floor(position.X / xSize);
+                    this.y = Math.floor(position.Y / ySize);
+
+                    for (var a = 0; a <= myMap.length; a++) {
+
+                      if( this.x ==  myMap[a].getFx()&& this.y == myMap[a].getFy()){
+                          clicked = myMap[a-1].id;
+                          break;
+                      }
+
+
+                    }
+            }
+        </script>
+
+
+
+        </canvas>
+    </body>
+</html>
