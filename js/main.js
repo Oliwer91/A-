@@ -33,6 +33,29 @@ function Tile(id,xPos,yPos,xSize,ySize,ctx) {
         return Math.floor(a);
     }
 
+    function left() {
+        var i ;
+        if(this.id%50==0){
+            var i = null;
+        }else{
+            i = this.id-1;
+        }
+
+        this.left=i;
+    }
+    function right(){
+        var i = this.id+1;
+        this.right=i;
+    }
+    function up(){
+        var i = this.id+50;
+        this.up = i;
+    }
+    function down() {
+        var i = this.id-50;
+        this.down=i;
+    }
+
 }
 
 
@@ -100,18 +123,7 @@ function nachbarn() {
     return a;
 }
 
-function left(l) {
-    this.left=l;
-}
-function right(r){
-    this.right=r;
-}
-function up(u){
-    this.up = u;
-}
-function down(d) {
-    this.down=d;
-}
+
 
 function getMousePos(canvas, evt) {
     var rect = canvas.getBoundingClientRect();

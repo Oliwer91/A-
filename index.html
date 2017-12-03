@@ -16,7 +16,7 @@
     </head>
     <body>
         <script src="js/main.js"></script>
-
+        <script src="js/Astar.js"></script>
         <canvas  height="600" width="600" id="myCanvas">
         <script>
             var c =document.getElementById("myCanvas");
@@ -32,16 +32,17 @@
             var startPosition;
             var ziel;
             startPosition = Math.floor((Math.random() * 2500) + 1);
-            for( i = 1;i<2501;i++){
+            for( i = 0;i<2501;i++){
 
                 var t = new Tile(i,xPos,yPos,xSize,ySize,ctx);
               //  t.getFx(xPos,xSize);
                 xPos +=xSize;
-                if(i%50==0){
+
+                if((i%50==0)&&(i!=0)){
                     yPos +=ySize;
                     xPos = 0;
                 }
-                console.log(t.getFx());
+
                 myMap.push(t);
             }
 
@@ -57,12 +58,11 @@
                 }else{
                     if(!block.includes(clicked)){
                         myMap[clicked].setWall(true,ctx);
+
                     }
                     else{
                          alert("Besteht bereits");
                     }
-
-
                 }
 
             },false);
@@ -78,34 +78,27 @@
                             myMap[clicked].setGoal(true,ctx);
                             ziel= myMap[clicked];
                             block.push(clicked);
+                            aStar(myMap,startPosition);
                     }
                 }
                 else{
                         alert("Ziel bereits Definiert!")
                     }
-
-
-
-
             },false);
 
-
-
-
-                function getObject(position, myMap) {
+            function getObject(position, myMap) {
                     this.x = Math.floor(position.X / xSize);
                     this.y = Math.floor(position.Y / ySize);
 
-                    for (var a = 0; a <= myMap.length; a++) {
-
-                      if( this.x ==  myMap[a].getFx()&& this.y == myMap[a].getFy()){
-                          clicked = myMap[a-1].id;
+                    for (var a = 1; a <= myMap.length; a++) {
+                      if(this.x ==  myMap[a].getFx()&& this.y == myMap[a].getFy()){
+                          clicked = myMap[a].id;
                           break;
                       }
-
-
                     }
             }
+
+
         </script>
 
 
