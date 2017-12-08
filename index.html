@@ -62,7 +62,7 @@
                     if(!block.includes(clicked)){
                         myMap[clicked].setWall(true,ctx);
                        // alert(myMap[clicked].getNachbarn());
-                        alert(myMap[clicked].id);
+                       // alert(myMap[clicked].id);
                     }
                     else{
                          alert("Besteht bereits");
@@ -94,7 +94,7 @@
                     this.x = Math.floor(position.X / xSize);
                     this.y = Math.floor(position.Y / ySize);
 
-                    for (var a = 1; a <= myMap.length; a++) {
+                    for (var a = 0; a <= myMap.length; a++) {
                       if(this.x ==  myMap[a].getFx()&& this.y == myMap[a].getFy()){
                           clicked = myMap[a].id;
                           break;
