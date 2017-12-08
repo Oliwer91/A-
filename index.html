@@ -39,12 +39,23 @@
 
 
                 myMap.push(t);
-
-                if((i%50==0)&&(i!=0)){
-                    yPos +=ySize;
-                    xPos = 0;
+                if(i<50){
+                    if((i%49==0)&&(i!=0)){
+                        yPos +=ySize;
+                        xPos = 0;
+                    }else{
+                        xPos +=xSize;
+                    }
+                }else {
+                    if((i%50==0)&&(i!=50)){
+                        yPos +=ySize;
+                        xPos = 0;
+                    }else{
+                        xPos +=xSize;
+                    }
                 }
-                xPos +=xSize;
+
+
             }
 
 
@@ -59,7 +70,7 @@
                 }else{
                     if(!block.includes(clicked)){
                         myMap[clicked].setWall(true,ctx);
-                        //alert(myMap[clicked].getNachbarn());
+                       // alert(myMap[clicked].getNachbarn());
                         alert(myMap[clicked].id);
                     }
                     else{
