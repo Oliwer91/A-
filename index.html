@@ -36,14 +36,15 @@
 
                 var t = new Tile(i,xPos,yPos,xSize,ySize,ctx);
               //  t.getFx(xPos,xSize);
-                xPos +=xSize;
+
+
+                myMap.push(t);
 
                 if((i%50==0)&&(i!=0)){
                     yPos +=ySize;
                     xPos = 0;
                 }
-
-                myMap.push(t);
+                xPos +=xSize;
             }
 
 
@@ -58,7 +59,8 @@
                 }else{
                     if(!block.includes(clicked)){
                         myMap[clicked].setWall(true,ctx);
-
+                        //alert(myMap[clicked].getNachbarn());
+                        alert(myMap[clicked].id);
                     }
                     else{
                          alert("Besteht bereits");

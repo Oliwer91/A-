@@ -18,10 +18,31 @@ function Tile(id,xPos,yPos,xSize,ySize,ctx) {
     ctx.strokeStyle="black";
     ctx.strokeRect(xPos,yPos,xSize,ySize);
 
-    this.setLeft=left;
-    this.setRight=right;
-    this.setUp=up;
-    this.setDown=down;
+    if(this.id%50==0){
+        this.left   = null;
+    }else{
+        this.left  = this.id-1;
+    }
+
+
+        if(this.id+1%50==0){
+            this.right = null;
+        }else{
+            this.right = this.id+1;
+        }
+
+        if(this.id+50>2500){
+            this.up = null;
+        }else{
+            this.up = this.id+50;
+        }
+
+        if(this.id-50 < 0){
+            this.down = null;
+        }else{
+            this.down = this.id-50;
+        }
+
     this.getNachbarn=nachbarn;
 
     function fx(){
@@ -33,28 +54,12 @@ function Tile(id,xPos,yPos,xSize,ySize,ctx) {
         return Math.floor(a);
     }
 
-    function left() {
-        var i ;
-        if(this.id%50==0){
-            var i = null;
-        }else{
-            i = this.id-1;
-        }
 
-        this.left=i;
-    }
-    function right(){
-        var i = this.id+1;
-        this.right=i;
-    }
-    function up(){
-        var i = this.id+50;
-        this.up = i;
-    }
-    function down() {
-        var i = this.id-50;
-        this.down=i;
-    }
+
+
+
+
+
 
 }
 
