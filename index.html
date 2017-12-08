@@ -32,32 +32,23 @@
             var startPosition;
             var ziel;
             startPosition = Math.floor((Math.random() * 2500) + 1);
-            for( i = 0;i<2501;i++){
-
-                var t = new Tile(i,xPos,yPos,xSize,ySize,ctx);
-              //  t.getFx(xPos,xSize);
+            var counter  = 0 ;
 
 
-                myMap.push(t);
-                if(i<50){
-                    if((i%49==0)&&(i!=0)){
-                        yPos +=ySize;
-                        xPos = 0;
-                    }else{
-                        xPos +=xSize;
-                    }
-                }else {
-                    if((i%50==0)&&(i!=50)){
-                        yPos +=ySize;
-                        xPos = 0;
-                    }else{
-                        xPos +=xSize;
-                    }
+            for( index =1 ;index < 51;index++){
+                for( var ii=1;ii<51;ii++){
+                    var t = new Tile(counter,xPos,yPos,xSize,ySize,ctx);
+
+                    myMap.push(t);
+                    xPos +=xSize;
+                    counter++;
                 }
-
-
+                xPos =0;
+                yPos +=ySize;
             }
-
+            for(var s = 0;s<myMap.length;s++){
+                console.log(myMap[s].id);
+            }
 
                 myMap[startPosition].setStart(true,ctx);
 
